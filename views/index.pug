@@ -10,6 +10,7 @@ html
       p Welcome to #{title}
       button(type="button", class="btn btn-primary btn-lg", onclick="double()") I am a button
       div(id="double") Up the amount
+      a(href="/ornaments") Search Ornaments
     script.
       let value = 0;
       let power = 1;
@@ -20,3 +21,5 @@ html
         const doubleDiv = document.getElementById('double');
         doubleDiv.textContent = `Two to the power ${value} is ${power}`;
       }
+
+       
