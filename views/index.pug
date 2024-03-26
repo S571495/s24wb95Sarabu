@@ -1,5 +1,22 @@
-extends layout
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css", crossorigin="anonymous")
+    link(rel="stylesheet", href="stylesheets/style.css")
+  body
+    div.container
+      h1= title
+      p Welcome to #{title}
+      button(type="button", class="btn btn-primary btn-lg", onclick="double()") I am a button
+      div(id="double") Up the amount
+    script.
+      let value = 0;
+      let power = 1;
 
-block content
-  h1= title
-  p Welcome to #{title}
+      function double() {
+        value++;
+        power *= 2;
+        const doubleDiv = document.getElementById('double');
+        doubleDiv.textContent = `Two to the power ${value} is ${power}`;
+      }
