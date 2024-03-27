@@ -13,10 +13,14 @@ html
       ]
     div.container-fluid
       div.row
-        - for (let item of results)
-          div.col-sm-2
+        - for (let [index, item] of results.entries())
+          div.col-sm-2(onclick=`buy(${index})`)
             p Material: #{item.material}
             p Style: #{item.style}
             p Price: $#{item.price}
+    script.
+      function buy(index) {
+        alert("You purchased item " + index + ".");
+      }
 
         
