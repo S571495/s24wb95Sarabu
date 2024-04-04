@@ -8,6 +8,8 @@ var router = express.Router();
 /* GET costumes */
 router.get('/', ornaments_controlers.ornaments_view_all_Page );
 
+// GET request for one costume.
+router.get('/costumes/:id', ornaments_controlers.ornaments_detail);
 
 
 /* GET home page. */
