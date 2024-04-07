@@ -6,7 +6,8 @@ var logger = require('morgan');
 
 
 require('dotenv').config();
-const connectionString = process.env.MONGO_CON
+const MONGO_CON = 'mongodb+srv://yashu:yashu2702@cluster0.pgymqwh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+const connectionString = MONGO_CON
 mongoose = require('mongoose');
 mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
 //Get the default connection
