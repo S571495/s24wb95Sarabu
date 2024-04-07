@@ -79,3 +79,56 @@ exports.ornaments_create_post = async function(req, res) {
     }
     };
     
+
+    // Handle ornaments update form on PUT.
+    exports.ornaments_update_put = async function(req, res) {
+    console.log(`update on id ${req.params.id} with body
+    ${JSON.stringify(req.body)}`)
+    try {
+        let toUpdate = await ornaments.findById(req.params.id);
+        if(req.body.checkboxsale) 
+            toUpdate.sale = true;
+        else 
+            toUpdate.same = false;
+
+        if (req.body.material) toUpdate.material = req.body.material;
+        if (req.body.style) toUpdate.style = req.body.style;
+        if (req.body.price) toUpdate.price = req.body.price;
+        let result = await toUpdate.save();
+        console.log("Success " + result);
+        res.send(result);
+      } catch (err) {
+        res.status(500);
+        res.send(`{"error": ${err}: Update for id ${req.params.id} failed}`);
+      }
+    };
+
+
+    // Handle ornaments delete on DELETE.
+    exports.ornaments_delete = async function(req, res) {
+        console.log("delete " + req.params.id)
+        try {
+        result = await ornaments.findByIdAndDelete( req.params.id)
+        console.log("Removed " + result)
+        res.send(result)
+        } catch (err) {
+        res.status(500)
+        res.send(`{"error": Error deleting ${err}}`);
+        }
+    };
+
+
+    // Handle a show one view with id specified by query
+    exports.ornaments_view_one_Page = async function(req, res) {
+        console.log("single view for id " + req.query.id)
+        try{
+        result = await ornaments.findById( req.query.id)
+        res.render('ornamentsdetail',
+        { title: 'ornaments Detail', toShow: result });
+        }
+        catch(err){
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+        }
+    };
+    
