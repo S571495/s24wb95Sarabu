@@ -27,3 +27,6 @@ router.get('/create', ornaments_controlers.ornaments_create_Page);
 
 /* GET create update page */
 router.get('/update', ornaments_controlers.ornaments_update_Page);
+
+/* GET delete ornaments page */
+router.get('/delete', ornaments_controlers.ornaments_delete_Page);
