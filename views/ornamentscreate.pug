@@ -4,13 +4,13 @@ block content
     h1= title
     form(id='ornamentsForm', action="/resource/ornaments", method="POST")
         div.form-group
-            label.ornamentsAttr(for='ornaments_type') ornaments type
+            label.ornamentsAttr(for='material') ornaments type
             input#material(type='text', name='material')
         div.form-group
-            label.ornamentsAttr(for='size') ornaments size
+            label.ornamentsAttr(for='style') ornaments size
             input#style(type='text', name='style')
         div.form-group
-            label.ornamentsAttr(for='cost') ornaments cost
+            label.ornamentsAttr(for='price') ornaments cost
             input#price(type='number', name='price')
         input(type="submit")
 

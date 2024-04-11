@@ -2,21 +2,24 @@ extends layout
 
 block content
     h1= title
-    - let ornamentsid = toShow._id
-    - let material = toShow.material
-    - let style = toShow.style
-    - let price = toShow.price
-    div
-        div.row
-            div(class='ornamentsAttr mr-3') Ornament ID is:
-            div #{ornamentsid}
-        div.row
-            div(class='ornamentsAttr mr-3') Ornament Type is:
-            div #{material}
-        div.row
-            div(class='ornamentsAttr mr-3') Ornament Style is:
-            div #{style}
-        div.row
-            div(class='ornamentsAttr mr-3') Ornament Price is:
-            div #{price}
+     if (toShow == null)
+        h2 No instance to detail
+     else
+        - let ornamentsid = toShow._id
+        - let material = toShow.material
+        - let style = toShow.style
+        - let price = toShow.price
+        div
+            div.row
+                div(class='ornamentsAttr mr-3') Ornament ID is:
+                div #{ornamentsid}
+            div.row
+                div(class='ornamentsAttr mr-3') Ornament Type is:
+                div #{material}
+            div.row
+                div(class='ornamentsAttr mr-3') Ornament Style is:
+                div #{style}
+            div.row
+                div(class='ornamentsAttr mr-3') Ornament Price is:
+                div #{price}
         
