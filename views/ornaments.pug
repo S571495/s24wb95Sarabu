@@ -1,26 +1,17 @@
-doctype html
-html
-  head
-    title= title
-    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css", crossorigin="anonymous")
-    link(rel="stylesheet", href="stylesheets/style.css")
-  body
-    -
-      let results = [
-        { material: 'Glass', style: 'Modern', price: 19.99 },
-        { material: 'Wood', style: 'Traditional', price: 24.95 },
-        { material: 'Metal', style: 'Vintage', price: 32.50 }
-      ]
-    div.container-fluid
-      div.row
-        - for (let [index, item] of results.entries())
-          div.col-sm-2(onclick=`buy(${index})`)
-            p Material: #{item.material}
-            p Style: #{item.style}
-            p Price: $#{item.price}
-    script.
-      function buy(index) {
-        alert("You purchased item " + index + ".");
-      }
+extends layout
 
-        
+block content
+  h1= title
+  
+  - let items = results;
+  div(class="container-fluid")
+    div(class="row m-1")
+      each item, index in results
+        - let destination = `/ornaments/update?id=${item._id}`
+        div(class="row-sm-2", class="m-1") Item #{item.material} (#{item.style}) is $#{item.price}
+        button.btn.btn-primary.ml-1(onclick=`dispatch("${destination}")`) Update
+
+  script.
+    function dispatch(path){
+      window.location.href=path
+    }
