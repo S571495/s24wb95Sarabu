@@ -25,10 +25,19 @@ router.get('/detail', ornaments_controlers.ornaments_view_one_Page);
 /* GET create ornaments page */
 router.get('/create', ornaments_controlers.ornaments_create_Page);
 
+// A little function to check if we have an authorized user and continue onor
+// redirect to login.
+const secured = (req, res, next) => {
+  if (req.user){
+  return next();
+  }
+  res.redirect("/login");
+  }
 /* GET create update page */
-router.get('/update', ornaments_controlers.ornaments_update_Page);
+router.get('/update', secured, ornaments_controlers.ornaments_update_Page);
 
 /* GET delete ornaments page */
 router.get('/delete', ornaments_controlers.ornaments_delete_Page);
 
-
+/* GET update costume page */
+router.get('/update', ornaments_controlers.ornaments_update_Page);

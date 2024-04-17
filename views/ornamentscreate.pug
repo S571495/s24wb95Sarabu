@@ -2,32 +2,35 @@ extends layout
 
 block content
     h1= title
-    form(id='ornamentsForm', action="/resource/ornaments", method="POST")
-        div.form-group
-            label.ornamentsAttr(for='material') ornaments type
-            input#material(type='text', name='material')
-        div.form-group
-            label.ornamentsAttr(for='style') ornaments size
-            input#style(type='text', name='style')
-        div.form-group
-            label.ornamentsAttr(for='price') ornaments cost
-            input#price(type='number', name='price')
-        input(type="submit")
+     if (toShow == null)
+        h2 No instance to Create
+     else
+        form(id='ornamentsForm', action="/resource/ornaments", method="POST")
+            div.form-group
+                label.ornamentsAttr(for='material') ornaments type
+                input#material(type='text', name='material')
+            div.form-group
+                label.ornamentsAttr(for='style') ornaments size
+                input#style(type='text', name='style')
+            div.form-group
+                label.ornamentsAttr(for='price') ornaments cost
+                input#price(type='number', name='price')
+            input(type="submit")
 
-    script.
-        document.forms['ornamentsForm'].addEventListener('submit', (event) => {
-            event.preventDefault();
-            // TODO do something here to show user that form is being submitted
-            fetch(event.target.action, {
-                method: 'POST',
-                body: new URLSearchParams(new FormData(event.target)) // event.target is the form
-            }).then((resp) => {
-                return resp.json(); // or resp.text() or whatever the server sends
-            }).then((body) => {
-                alert("Save succeded")
-            // TODO handle body
-            }).catch((error) => {
-            // TODO handle error
-                alert("Save failed " + error )
+        script.
+            document.forms['ornamentsForm'].addEventListener('submit', (event) => {
+                event.preventDefault();
+                // TODO do something here to show user that form is being submitted
+                fetch(event.target.action, {
+                    method: 'POST',
+                    body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+                }).then((resp) => {
+                    return resp.json(); // or resp.text() or whatever the server sends
+                }).then((body) => {
+                    alert("Save succeded")
+                // TODO handle body
+                }).catch((error) => {
+                // TODO handle error
+                    alert("Save failed " + error )
+                });
             });
-        });

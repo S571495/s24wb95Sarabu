@@ -4,12 +4,18 @@ block content
   h1= title
   
   - let items = results;
+  - let createpage = `dispatch(\"/ornaments/create")`
+  button.btn( class="btn-primary ml-1", onclick= createpage) Create page
   div(class="container-fluid")
     div(class="row m-1")
       each item, index in results
         - let destination = `/ornaments/update?id=${item._id}`
+        - let detailpage = `dispatch(\"/ornaments/detail?id=${item._id}\")`
+        - let deletepage = `dispatch(\"/ornaments/delete?id=${item._id}\")`
         div(class="row-sm-2", class="m-1") Item #{item.material} (#{item.style}) is $#{item.price}
-        button.btn.btn-primary.ml-1(onclick=`dispatch("${destination}")`) Update
+        button.btn.btn-primary.ml-1(onclick=`dispatch("${destination}")`, style='margin-right: 10px;') Update
+        button.btn( class="btn-primary ml-1", onclick= detailpage, style='margin-right: 10px;') Detail page
+        button.btn( class="btn-primary ml-1", onclick= deletepage, style='margin-right: 10px;') Delete page
 
   script.
     function dispatch(path){
