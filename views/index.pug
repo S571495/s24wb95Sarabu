@@ -1,25 +1,12 @@
-doctype html
-html
-  head
-    title= title
-    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css", crossorigin="anonymous")
-    link(rel="stylesheet", href="stylesheets/style.css")
-  body
-    div.container
-      h1= title
-      p Welcome to #{title}
-      button(type="button", class="btn btn-primary btn-lg", onclick="double()") I am a button
-      div(id="double") Up the amount
-      a(href="/ornaments") Search Ornaments
-    script.
-      let value = 0;
-      let power = 1;
+extends layout
 
-      function double() {
-        value++;
-        power *= 2;
-        const doubleDiv = document.getElementById('double');
-        doubleDiv.textContent = `Two to the power ${value} is ${power}`;
-      }
-
-       
+block content
+ if (!user)
+  a(href="/login") Login
+  br
+  a(href="/register") Register
+ if (user)
+  p You are currently logged in as #{user.username}
+  a(href="/ornaments") Take me to ornaments
+  br
+  a(href="/logout") Logout

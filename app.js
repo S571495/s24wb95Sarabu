@@ -5,6 +5,25 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    Account.findOne({ username: username })
+    .then(function (user){
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    })
+    .catch(function(err){
+      return done(err)
+    })
+  })
+)
 // passport config
 // Use the existing connection
 // The Account model
@@ -13,24 +32,7 @@ passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-  Account.findOne({ username: username })
-  .then(function (user){
-  if (err) { return done(err); }
-  if (!user) {
-  return done(null, false, { message: 'Incorrect username.' });
-  }
-  if (!user.validPassword(password)) {
-  return done(null, false, { message: 'Incorrect password.' });
-  }
-  return done(null, user);
-  })
-  .catch(function(err){
-  return done(err)
-  })
-  })
-  )
+
 
 require('dotenv').config();
 const MONGO_CON = 'mongodb+srv://yashu:yashu2702@cluster0.pgymqwh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
