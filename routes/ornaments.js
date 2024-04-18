@@ -37,7 +37,7 @@ const secured = (req, res, next) => {
 router.get('/update', secured, ornaments_controlers.ornaments_update_Page);
 
 /* GET delete ornaments page */
-router.get('/delete', ornaments_controlers.ornaments_delete_Page);
+router.get('/delete', secured, ornaments_controlers.ornaments_delete_Page);
 
 /* GET update costume page */
-router.get('/update', ornaments_controlers.ornaments_update_Page);
+router.get('/update', secured, ornaments_controlers.ornaments_update_Page);
